@@ -1,17 +1,17 @@
 ## PhysioConnect
 
 ## Project Overview:
-
-
 PhysioConnect is a web-based appointment booking system designed for physiotherapists and patients. Both therapists and patients can sign up and log in. Therapists provide their availability and location during registration, and patients can search for physiotherapists based on location (e.g., state/city) and book appointments accordingly.
 ________________________________________
-Key User Roles
+Key User Roles:
+
 1. Patient (User)
 ●	Register & log in
 ●	Filter therapists by state
 ●	Book appointment (select therapist, date, time)
 ●	View and cancel their appointments
-2. Therapist
+
+3. Therapist
 ●	Register & log in
 ●	Provide:
 ○	Name, email, password
@@ -19,17 +19,22 @@ Key User Roles
 ○	Location (state & city)
 ○	Available time slots
 ●	View their own appointments (optional future feature)
-3. Admin (Optional)
+
+5. Admin (Optional)
 ●	View counts (total users, therapists, appointments)
 ●	Manage users and therapists (optional stretch goal)
+
 ________________________________________
-Core Features
+Core Features: 
+
 Authentication
 ●	JWT-based secure login/signup for both roles
 ●	Passwords hashed using bcrypt
+
 Therapist Management
 ●	Signup with full details including location and time slots
 ●	Stored in the therapist collection
+
 Location-Based Booking
 ●	Users select a state from a dropdown
 ●	Filtered list of therapists from that location is displayed
@@ -39,12 +44,14 @@ Appointments
 ●	Status: booked or cancelled
 ●	Patients can view and cancel their bookings
 ________________________________________
-Tech Stack
-Frontend
+Tech Stack:
+
+-> Frontend
 ●	React + Tailwind CSS
 ●	React Router
 ●	Axios (for API calls)
-Backend
+
+-> Backend
 ●	Node.js + Express
 ●	MongoDB + Mongoose
 ●	JWT + bcrypt for Auth
