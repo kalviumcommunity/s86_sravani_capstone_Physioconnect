@@ -12,7 +12,7 @@ connectDB();
 app.use(cors());
 app.use(express.json());
 
-
+app.use('/api/users', require('./routes/user'));
 app.use('/api/therapists', require('./routes/therapists'));
 app.use('/api/appointments', require('./routes/appointments'));
 
