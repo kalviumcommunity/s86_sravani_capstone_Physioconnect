@@ -1,12 +1,13 @@
 const mongoose = require('mongoose');
 
-const TherapistSchema = new mongoose.Schema({
-  name: String,
-  email: String,
-  specialization: String,
-  state: String,
-  city: String,
-  availableTimeSlots: [String],
+const therapistSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  specialization: { type: String, required: true },
+  state: { type: String, required: true },
+  city: { type: String, required: true },
+  availableSlots: [{ type: String }] 
 });
 
-module.exports = mongoose.model('Therapist', TherapistSchema);
+module.exports = mongoose.model('Therapist', therapistSchema);
