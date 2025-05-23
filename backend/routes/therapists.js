@@ -1,6 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
-const Therapist = require('../models/Therapist');
+const Therapist = require('../models/therapists');
 
 const router = express.Router();
 
