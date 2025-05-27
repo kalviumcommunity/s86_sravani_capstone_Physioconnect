@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.post('/signup', async (req, res) => {
   try {
-    const { name, email, password, specialization, state, city, availableSlots } = req.body;
+    const { name, email, password, specialization, state, city, availableTimeSlots } = req.body;
 
     const existing = await Therapist.findOne({ email });
     if (existing) return res.status(400).json({ error: 'Therapist already exists' });
@@ -19,9 +19,8 @@ router.post('/signup', async (req, res) => {
       email,
       password: hashedPassword,
       specialization,
-      state,
-      city,
-      availableSlots,
+      location: { state, city },
+      availableTimeSlots
     });
 
     await newTherapist.save();
@@ -44,7 +43,7 @@ router.get('/', async (req, res) => {
 
 router.get('/state/:state', async (req, res) => {
   try {
-    const therapists = await Therapist.find({ state: req.params.state });
+    const therapists = await Therapist.find({ 'location.state': req.params.state });
     res.json(therapists);
   } catch (err) {
     res.status(500).json({ error: 'Error fetching therapists by state' });

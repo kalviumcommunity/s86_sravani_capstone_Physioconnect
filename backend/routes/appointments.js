@@ -3,6 +3,7 @@ const Appointment = require('../models/Appointment');
 
 const router = express.Router();
 
+// Book appointment
 router.post('/book', async (req, res) => {
   try {
     const { patientId, therapistId, date, time } = req.body;
@@ -16,7 +17,7 @@ router.post('/book', async (req, res) => {
       therapistId,
       date,
       time,
-      status: 'booked',
+      status: 'booked'
     });
 
     await newAppointment.save();
@@ -26,27 +27,31 @@ router.post('/book', async (req, res) => {
   }
 });
 
-
+// Get appointments for a user (with therapist details)
 router.get('/user/:userId', async (req, res) => {
   try {
-    const appointments = await Appointment.find({ patientId: req.params.userId });
+    const appointments = await Appointment.find({ patientId: req.params.userId })
+      .populate('therapistId', 'name email specialization location');
+
     res.json(appointments);
   } catch (err) {
     res.status(500).json({ error: 'Error fetching appointments' });
   }
 });
 
-router.get('/user/:userId/all', async (req, res) => {
+// Therapist-specific view (optional)
+router.get('/therapist/:therapistId', async (req, res) => {
   try {
-    const appointments = await Appointment.find({ patientId: req.params.userId });
-    res.json(appointments); 
+    const appointments = await Appointment.find({ therapistId: req.params.therapistId })
+      .populate('patientId', 'name email');
+
+    res.json(appointments);
   } catch (err) {
-    res.status(500).json({ error: 'Error fetching appointments' });
+    res.status(500).json({ error: 'Error fetching appointments for therapist' });
   }
 });
 
-
-
+// Cancel appointment
 router.put('/:appointmentId/cancel', async (req, res) => {
   try {
     const { appointmentId } = req.params;
@@ -63,7 +68,7 @@ router.put('/:appointmentId/cancel', async (req, res) => {
 
     res.status(200).json({
       message: 'Appointment cancelled successfully',
-      appointment: updatedAppointment,
+      appointment: updatedAppointment
     });
   } catch (err) {
     res.status(500).json({ error: 'Error cancelling appointment' });

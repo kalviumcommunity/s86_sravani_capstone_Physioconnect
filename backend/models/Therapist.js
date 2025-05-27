@@ -9,7 +9,7 @@ const therapistSchema = new mongoose.Schema({
     state: String,
     city: String
   },
-  availableTimeSlots: [String], 
+  availableTimeSlots: [String],
   role: { type: String, default: 'therapist' }
 });
 
