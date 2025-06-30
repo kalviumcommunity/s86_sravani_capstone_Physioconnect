@@ -10,7 +10,8 @@ const therapistSchema = new mongoose.Schema({
     city: String
   },
   availableTimeSlots: [String],
-  role: { type: String, default: 'therapist' }
+  role: { type: String, default: 'therapist' },
+  profileImage: String,
 });
 
 module.exports = mongoose.model('Therapist', therapistSchema);
